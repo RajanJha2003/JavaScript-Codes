@@ -1,0 +1,81 @@
+<!-- Create a form with fieldsfor name, email, and password. Using JavaScript,
+implement client-side validation for the following criteria:
+a. Name: Should contain only alphabetic characters.
+b. Email: Should match a valid email format.
+c. Password: Should have a minimum length of 8 characters, including at least
+one uppercase letter, one lowercase letter, and one digit.
+d. After validating the form, store the name and email in localstorage -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .error {
+        color: red;
+    }
+</style>
+<body>
+    <h2>Registration Form</h2>
+
+<form id="registrationForm">
+  <label for="name">Name:</label><br>
+  <input type="text" id="name" required><br><br>
+
+  <label for="email">Email:</label><br>
+  <input type="email" id="email" required><br><br>
+
+  <label for="password">Password:</label><br>
+  <input type="password" id="password" required><br><br>
+
+  <button type="submit">Submit</button>
+
+  <p id="message" class="error"></p>
+</form>
+  <script>
+    const form = document.getElementById('registrationForm');
+    const message = document.getElementById('message');
+
+    form.addEventListener('submit',(e)=>{
+        e.preventDefault();
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+
+        const nameRegex = /^[A-Za-z]+$/;
+        if(!nameRegex.test(name)){
+            message.textContent = 'Name should contain only alphabetic characters.';
+            return;
+        }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if(!emailRegex.test(email)){
+            message.textContent = 'Email should match a valid email format.';
+            return;
+        }
+
+const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
+        if(!passwordRegex.test(password)){
+            message.textContent = 'Password should have a minimum length of 8 characters, including at least one uppercase letter, one lowercase letter, and one digit.';
+            return;
+        }
+
+        localStorage.setItem('name',name);
+        localStorage.setItem('email',email);
+        message.style.color = 'green';
+        message.textContent = 'Form submitted successfully!';
+
+        form.reset();
+
+
+    })
+
+
+  </script>
+    
+</body>
+</html>
