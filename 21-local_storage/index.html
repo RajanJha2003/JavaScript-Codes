@@ -1,0 +1,33 @@
+<!-- Create a new button "clearButton" that, when clicked, clearsthe click count from
+local storage and resets the counter. -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>Items in cart: <span id="cartCount">0</span></p>
+    <button id="addToCart">Add to Cart</button>
+<button id="clearButton">Clear Cart</button>
+<script>
+    let count=parseInt(localStorage.getItem("count")) || 0;
+    
+    document.getElementById("cartCount").innerText=count;
+
+    document.getElementById("addToCart").addEventListener("click",()=>{
+        count++;
+        localStorage.setItem("count",count);
+        document.getElementById("cartCount").innerText=count;
+    })
+
+    document.getElementById("clearButton").addEventListener("click",()=>{
+        count=0;
+        localStorage.setItem("count",count);
+        document.getElementById("cartCount").innerText=count;
+    })
+</script>
+</body>
+</html>
