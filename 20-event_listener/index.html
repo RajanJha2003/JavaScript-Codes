@@ -1,0 +1,22 @@
+<!-- Implement an event listener that triggers an alert when a button with the ID
+"myButton" is clicked on a web page. -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn">
+        Click
+    </button>
+    <script>
+        const btn=document.getElementById("btn");
+        btn.addEventListener("click",()=>{
+            alert("Button clicked")
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!-- Implement an event listener that triggers an alert showing the number of items
+added to the cart when a button with the ID "addToCart" is clicked. Track the item
+count in localstorage. -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="addToCart">Add to Cart</button>
+    <script>
+
+        let count=parseInt(localStorage.getItem("count")) || 0;
+        const btn=document.getElementById("addToCart");
+        btn.addEventListener("click",()=>{
+            count++;
+            localStorage.setItem("count",count);
+            alert("Items count: "+count)
+
+        })
+    </script>
+</body>
+</html>
