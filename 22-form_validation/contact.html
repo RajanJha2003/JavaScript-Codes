@@ -1,0 +1,79 @@
+<!-- Create a contact form with fieldsfor name, email, and query. Implement JavaScript
+validation to ensure:
+a. Name: Is not empty and contains only alphabetic characters.
+b. Email: Matches a valid email format.
+c. Query: Is not empty and lessthan 1000 characters.
+d. After validation, store the name, email, and query in localstorage -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h2>Contact Form</h2>
+
+    <form id="contactForm">
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name"><br><br>
+
+        <label for="email">Email:</label><br>
+        <input type="text" id="email" name="email"><br><br>
+
+        <label for="query">Query:</label><br>
+        <textarea id="query" name="query" rows="4" cols="50"></textarea><br><br>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <p id="message" class="error"></p>
+
+    <script>
+        const form = document.getElementById("contactForm");
+        const message = document.getElementById("message");
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+            const query = document.getElementById("query").value;
+
+            const nameRegex = /^[A-Za-z\s]+$/;
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (name === "" || !nameRegex.test(name)) {
+                messageEl.textContent = "Name must contain only letters and cannot be empty.";
+                return;
+            }
+            if (!emailRegex.test(email)) {
+                messageEl.textContent = "Please enter a valid email address.";
+                return;
+            }
+            if (query === "" || query.length > 1000) {
+                messageEl.textContent = "Query cannot be empty and must be less than 1000 characters.";
+                return;
+            }
+
+            const contact={
+                name:name,
+                email:email,
+                query:query
+            }
+
+            const contacts=JSON.parse(localStorage.getItem("contact")) || [];
+            contacts.push(contact);
+
+            localStorage.setItem("contact",JSON.stringify(contacts));
+            message.style.color="green";
+            message.textContent="Form submitted";
+
+            form.reset();
+        })
+    </script>
+</body>
+
+</html>
