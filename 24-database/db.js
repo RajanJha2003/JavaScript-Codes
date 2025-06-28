@@ -14,3 +14,5 @@ conn.connect((err)=>{
     }
     console.log("Database connected")
 })
+
+module.exports=conn;
