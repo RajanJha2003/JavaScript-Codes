@@ -1,0 +1,82 @@
+<!-- Create a product form with fieldsfor product name, price, and quantity. Use
+JavaScript for client-side validation:
+a. Product Name: Should not be empty.
+b. Price: Should be a positive number.
+c. Quantity: Should be a numeric value greater than 0.
+d. Store the product’s detailsin localstorage upon successful validation. -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h2>Product Form</h2>
+
+<form id="productForm">
+  <label for="productName">Product Name:</label><br>
+  <input type="text" id="productName" name="productName"><br><br>
+
+  <label for="price">Price:</label><br>
+  <input type="number" id="price" name="price"><br><br>
+
+  <label for="quantity">Quantity:</label><br>
+  <input type="number" id="quantity" name="quantity"><br><br>
+
+  <button type="submit">Add Product</button>
+</form>
+
+<p id="message" class="error"></p>
+
+<script>
+    const form=document.getElementById('productForm');
+    const message=document.getElementById('message');
+
+    form.addEventListener('submit',(e)=>{
+        e.preventDefault();
+        const name=document.getElementById('productName').value;
+        const price=parseFloat(document.getElementById('price').value);
+        const quantity=parseInt(document.getElementById('quantity').value);
+
+        if(name==""){
+            message.textContent='Product Name should not be empty.';
+            return;
+        }
+
+        if(isNaN(price) || price <=0){
+            message.textContent='Price should be a positive number.';
+            return;
+        }
+        if(isNaN(quantity) || quantity <=0){
+            message.textContent='Quantity should be a numeric value greater than 0.';
+            return;
+        }
+
+        const product={
+            name:name,
+            price:price,
+            quantity:quantity
+        }
+
+        const products=JSON.parse(localStorage.getItem('product')) || [];
+        products.push(product);
+
+        localStorage.setItem("product",JSON.stringify(products));
+        message.style.color="green";
+        message.textContent="Form submitted";
+
+        form.reset();
+
+    })
+    
+
+</script>
+</body>
+</html>
