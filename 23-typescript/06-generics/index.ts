@@ -1,3 +1,7 @@
+// Create a generic function getStudentInfo<T>(info: T): T that returns any type of
+// student information, such as name, ID, or grade.
+
+
 class StudentInfo<T> {
     info: T;
 

@@ -1,5 +1,7 @@
 
-
+// Create an interface Attendance with a method markAttendance().
+// Implement this interface in the Student class, and define how attendance is marked
+// for a student.
 interface Attendance{
     markAttendance():void;
 }
